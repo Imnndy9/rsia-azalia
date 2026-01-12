@@ -1,59 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+RSIA AZALIA
+Website Rumah Sakit Ibu & Anak
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+DESKRIPSI
+Website RSIA AZALIA adalah website berbasis Laravel yang digunakan sebagai website profil Rumah Sakit Ibu & Anak.
+Website ini menampilkan informasi rumah sakit, layanan, dokter, dan menyediakan akses janji temu via WhatsApp.
+Ke depannya website ini akan dikembangkan dengan fitur berita, komentar pengunjung, dan halaman admin.
 
-## About Laravel
+TEKNOLOGI YANG DIGUNAKAN
+PHP >= 8.2
+Laravel 12
+Composer
+Laragon (Windows)
+MySQL (untuk pengembangan selanjutnya)
+Bootstrap / CSS
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+STRUKTUR PROJECT (RINGKAS)
+rsia-azalia/
+├── app/                # Logic aplikasi
+├── routes/             # Routing web
+├── resources/
+│   └── views/          # Blade template (HTML)
+├── public/             # Aset publik (CSS, JS, images)
+├── database/           # Migration & seeder
+├── .env.example        # Contoh konfigurasi environment
+├── composer.json
+└── README.md
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+CARA MENJALANKAN PROJECT (LOCAL)
 
-## Learning Laravel
+Clone Repository
+Pastikan Git sudah terinstall, lalu jalankan:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+git clone https://github.com/Imnndy9/rsia-azalia.git
+cd rsia-azalia
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Install Dependency
+Pastikan Composer sudah terinstall:
 
-## Laravel Sponsors
+composer install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Konfigurasi Environment
+Salin file .env.example menjadi .env
+copy .env.example .env
 
-### Premium Partners
+Generate application key:
+php artisan key:generate
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Jalankan Server
+php artisan serve
 
-## Contributing
+Buka browser dan akses:
+http://127.0.0.1:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+KONFIGURASI DATABASE (OPSIONAL)
+Edit file .env:
 
-## Code of Conduct
+DB_DATABASE=rsia_azalia
+DB_USERNAME=root
+DB_PASSWORD=
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Jika sudah ada migration:
+php artisan migrate
 
-## Security Vulnerabilities
+CATATAN PENTING
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+File .env tidak ikut ke GitHub
+Folder vendor tidak ikut ke GitHub
+Setiap developer wajib menjalankan composer install setelah clone
 
-## License
+FITUR SAAT INI
+Halaman Beranda
+Tentang Rumah Sakit
+Layanan
+Dokter
+Kontak
+Tombol Janji Temu via WhatsApp
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ROADMAP PENGEMBANGAN
+Sistem Berita
+Komentar Pengunjung
+Halaman Admin (CRUD Konten)
+Dashboard Admin
+Keamanan dan Validasi
+
+DEVELOPER
+Nama: Iman
+Project: Website RSIA AZALIA
+Framework: Laravel
+
+KONTRIBUSI
+Project ini masih tahap pengembangan.
+Masukan dan kontribusi sangat terbuka.

@@ -122,6 +122,6 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
-    'hospital_wa' => env('HOSPITAL_WA', '6281234567890'),
+    'hospital_wa' => env('HOSPITAL_WA', '6282360335229'),
     'hospital_wa_default_text' => env('HOSPITAL_WA_DEFAULT_TEXT', 'Halo RSIA AZALIA, saya ingin membuat janji temu.'),
 ];

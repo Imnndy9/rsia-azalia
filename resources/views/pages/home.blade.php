@@ -26,7 +26,7 @@
         <div class="d-flex gap-2 flex-wrap">
           <a class="btn btn-success btn-round px-4" target="_blank" rel="noopener"
                 href="{{ 'https://wa.me/' . config('app.hospital_wa') . '?text=' . urlencode(config('app.hospital_wa_default_text')) }}">
-                Janji Temu (WhatsApp)
+                Janji Temu (WA)
             </a>
           <a class="btn btn-outline-light btn-round px-4" href="{{ route('services') }}">
             Lihat Layanan
@@ -80,7 +80,7 @@
           <a class="btn btn-outline-success btn-sm btn-round mt-3" href="{{ route('services') }}">Detail</a>
         </div>
       </div>
-    @endforeach
+    @endforeach 
   </div>
 </div>
 

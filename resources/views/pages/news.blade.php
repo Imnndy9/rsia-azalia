@@ -17,20 +17,36 @@
         </header>
 
         {{-- Featured / Headline --}}
-        <section class="p-4 p-md-5 mb-4 rounded bg-light">
-            <div class="row align-items-center g-4">
-                <div class="col-md-7">
-                    <h2 class="fw-bold">Headline: Layanan Baru & Peningkatan Fasilitas</h2>
-                    <p class="lead mb-3">
-                        RS Azalia terus meningkatkan kualitas layanan untuk kenyamanan pasien dan keluarga.
-                    </p>
-                    <a href="#" class="fw-bold text-decoration-none">Baca selengkapnya →</a>
-                </div>
-                <div class="col-md-5">
-                    <img class="img-fluid rounded" src="https://via.placeholder.com/600x360" alt="Headline Berita">
-                </div>
-            </div>
-        </section>
+<section class="p-4 p-md-5 mb-4 rounded bg-light">
+    <div class="row align-items-center g-4">
+        <div class="col-md-7">
+
+            @if ($headline)
+                <h2 class="fw-bold">{{ $headline->title }}</h2>
+
+                <p class="lead mb-3">
+                    {{ $headline->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($headline->content), 140) }}
+                </p>
+
+                <a href="{{ route('news', $headline->slug) }}" class="fw-bold text-decoration-none">
+                    Baca selengkapnya →
+                </a>
+            @else
+                <h2 class="fw-bold">Headline</h2>
+                <p class="lead mb-3">Belum ada headline yang dipilih.</p>
+            @endif
+
+        </div>
+
+        <div class="col-md-5">
+            @if ($headline && $headline->image)
+                <img class="img-fluid rounded" src="{{ asset('storage/' . $headline->image) }}" alt="{{ $headline->title }}">
+            @else
+                <img class="img-fluid rounded" src="https://via.placeholder.com/600x360" alt="Headline Berita">
+            @endif
+        </div>
+    </div>
+</section>
 
         <div class="row g-5">
             {{-- Konten Berita --}}
@@ -38,74 +54,49 @@
 
                 <h3 class="fw-bold mb-3">Berita Terbaru</h3>
 
-                {{-- Card list berita --}}
-                <article class="card mb-4 shadow-sm">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/500x350"
-                                class="img-fluid h-100 w-100 object-fit-cover rounded-start" alt="Berita 1">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <small class="text-muted">15 Feb 2026 • Kegiatan</small>
-                                <h4 class="card-title fw-bold mt-1">Seminar Kesehatan Gratis untuk Masyarakat</h4>
-                                <p class="card-text text-muted mb-3">
-                                    RS Azalia mengadakan seminar edukasi kesehatan dengan narasumber dokter spesialis.
-                                </p>
-                                <a href="#" class="btn btn-outline-primary fw-bold">Baca</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                {{-- Card list berita (dinamis dari DB) --}}
+{{-- Card list berita --}}
+@if ($news->count())
+    @foreach ($news as $item)
+        <article class="card mb-4 shadow-sm">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img
+                        src="{{ $item->image ? asset('storage/' . $item->image) : 'https://via.placeholder.com/500x350' }}"
+                        class="img-fluid h-100 w-100 object-fit-cover rounded-start"
+                        alt="{{ $item->title }}"
+                    >
+                </div>
 
-                <article class="card mb-4 shadow-sm">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/500x350"
-                                class="img-fluid h-100 w-100 object-fit-cover rounded-start" alt="Berita 2">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <small class="text-muted">10 Feb 2026 • Layanan</small>
-                                <h4 class="card-title fw-bold mt-1">Pelayanan Poli Diperluas pada Jam Tertentu</h4>
-                                <p class="card-text text-muted mb-3">
-                                    Penyesuaian jadwal layanan untuk memudahkan pasien melakukan konsultasi.
-                                </p>
-                                <a href="#" class="btn btn-outline-primary fw-bold">Baca</a>
-                            </div>
-                        </div>
-                    </div>
-                </article>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <small class="text-muted">
+                            {{ optional($item->published_at)->format('d M Y') ?? '-' }}
+                            • {{ $item->category ?? 'Umum' }}
+                        </small>
 
-                <article class="card mb-4 shadow-sm">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/500x350"
-                                class="img-fluid h-100 w-100 object-fit-cover rounded-start" alt="Berita 3">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <small class="text-muted">02 Feb 2026 • Edukasi</small>
-                                <h4 class="card-title fw-bold mt-1">Tips Menjaga Imunitas di Musim Hujan</h4>
-                                <p class="card-text text-muted mb-3">
-                                    Edukasi singkat untuk membantu keluarga tetap sehat dan waspada penyakit musiman.
-                                </p>
-                                <a href="#" class="btn btn-outline-primary fw-bold">Baca</a>
-                            </div>
-                        </div>
+                        <h4 class="card-title fw-bold mt-1">{{ $item->title }}</h4>
+
+                        <p class="card-text text-muted mb-3">
+                            {{ $item->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($item->content), 120) }}
+                        </p>
+
+                        <a href="{{ route('news.show', $item->slug) }}" class="btn btn-outline-primary fw-bold">
+                        Baca
+                        </a>
                     </div>
-                </article>
+                </div>
+            </div>
+        </article>
+    @endforeach
+@else
+    <div class="alert alert-warning">Belum ada berita.</div>
+@endif
 
                 {{-- Pagination (dummy) --}}
-                <nav aria-label="Pagination berita">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><span class="page-link">Sebelumnya</span></li>
-                        <li class="page-item active"><span class="page-link">1</span></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Berikutnya</a></li>
-                    </ul>
-                </nav>
-            </div>
+                <div class="mt-3">
+    {{ $news->links() }}
+</div>
 
             {{-- Sidebar --}}
             <div class="col-md-4">
